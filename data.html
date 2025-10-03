@@ -88,103 +88,113 @@
 <section>
   <h2>Формы настройки обработки</h2>
 
-  <details open>
-    <summary>Параметры графика</summary>
-    <form action="/plot" method="get">
-      <p>
-        <label for="chart_type">Тип графика:</label>
-        <select name="chart_type" id="chart_type">
-          <option value="bar">Столбчатая</option>
-          <option value="line">Линейная</option>
-          <option value="scatter">Точечная</option>
-        </select>
-      </p>
-      <p>
-        <label for="x_axis">Ось X:</label>
-        <select name="x_axis" id="x_axis">
-          <option value="Год">Год</option>
-          <option value="Страна">Страна</option>
-          <option value="Марка">Марка</option>
-          <option value="Модель">Модель</option>
-        </select>
-      </p>
-      <p>
-        <label for="y_axis">Ось Y:</label>
-        <select name="y_axis" id="y_axis">
-          <option value="Мощность (л.с.)">Мощность (л.с.)</option>
-          <option value="Объём (л)">Объём (л)</option>
-          <option value="0–100 (с)">0–100 (с)</option>
-          <option value="Тираж (шт.)">Тираж (шт.)</option>
-        </select>
-      </p>
-      <p>
-        <label for="group_by">Группировка:</label>
-        <select name="group_by" id="group_by">
-          <option value="none">Нет</option>
-          <option value="Страна">Страна</option>
-          <option value="Марка">Марка</option>
-          <option value="Тип кузова">Тип кузова</option>
-        </select>
-      </p>
-      <p><input type="submit" value="Построить"></p>
-    </form>
-  </details>
+  <h2>График</h2>
 
-  <details open>
-    <summary>Сортировка</summary>
-    <form action="/sort" method="get">
-      <p>
-        <label for="sort_by">Поле:</label>
-        <select name="sort_by" id="sort_by">
-          <option value="Марка">Марка</option>
-          <option value="Модель">Модель</option>
-          <option value="Год">Год</option>
-          <option value="Страна">Страна</option>
-          <option value="Мощность (л.с.)">Мощность (л.с.)</option>
-          <option value="0–100 (с)">0–100 (с)</option>
-          <option value="Тираж (шт.)">Тираж (шт.)</option>
-          <option value="Цена">Цена</option>
-        </select>
-      </p>
-      <p>Порядок:
-        <label><input type="radio" name="order" value="asc" checked> Возрастание</label>
-        <label><input type="radio" name="order" value="desc"> Убывание</label>
-      </p>
-      <p><input type="submit" value="Отсортировать"></p>
-    </form>
-  </details>
+  <!-- «Ось OX» -->
+  <fieldset>
+    <legend>Значение по оси OX</legend>
+    <p><label><input type="radio" name="x" value="Марка" checked> Марка</label></p>
+    <p><label><input type="radio" name="x" value="Страна"> Страна</label></p>
+    <p><label><input type="radio" name="x" value="Год"> Год</label></p>
+    <p><label><input type="radio" name="x" value="Модель"> Модель</label></p>
+  </fieldset>
 
-  <details open>
-    <summary>Фильтры</summary>
-    <form action="/filter" method="get">
-      <p>
-        <label for="country">Страна:</label>
-        <input type="text" id="country" name="country" placeholder="Италия">
-      </p>
-      <p>
-        <label for="brand">Марка:</label>
-        <input type="text" id="brand" name="brand" placeholder="Ferrari">
-      </p>
-      <p>
-        <label for="year_from">Год: от</label>
-        <input type="number" id="year_from" name="year_from" min="1900" max="2025" value="1930">
-        <label for="year_to">до</label>
-        <input type="number" id="year_to" name="year_to" min="1900" max="2025" value="2025">
-      </p>
-      <p>
-        <label for="hp_min">Мощность ≥</label>
-        <input type="number" id="hp_min" name="hp_min" min="0" step="1" value="200">
-      </p>
-      <p>
-        <label for="accel_max">0–100 ≤</label>
-        <input type="number" id="accel_max" name="accel_max" min="0" step="0.1" value="6.0">
-      </p>
-      <p>
-        <input type="submit" value="Применить фильтры">
-        <input type="reset" value="Сбросить">
-      </p>
-    </form>
-  </details>
+  <!-- «Результат» -->
+  <fieldset>
+    <legend>Результат</legend>
+    <p><label><input type="checkbox" name="y_power" checked>  Макс Мощность (л.с.)</label></p>
+    <p><label><input type="checkbox" name="y_accel"> Среднее 0–100 (с)</label></p>
+    <p><label><input type="checkbox" name="y_volume"> Средний Объём (л)</label></p>
+    <p><label><input type="checkbox" name="y_price"> Максимальная Цена ($)</label></p>
+  </fieldset>
+
+  <p><input type="submit" value="Построить"></p>
+  <p><i>Здесь будет график.</i></p>
+</section>
+
+<!-- ===== Фильтр ===== -->
+<section>
+  <h2>Фильтр</h2>
+  <form action="/filter" method="get">
+    <p><label for="brand">Марка:</label> <input type="text" id="brand" name="brand" placeholder="Ferrari"></p>
+    <p><label for="model">Модель:</label> <input type="text" id="model" name="model" placeholder="250 GTO"></p>
+    <p><label for="country">Страна:</label> <input type="text" id="country" name="country" placeholder="Италия"></p>
+    <p>
+      <label for="year_from">Год: от</label>
+      <input type="number" id="year_from" name="year_from" min="1900" max="2025" value="1930">
+      <label for="year_to">до</label>
+      <input type="number" id="year_to" name="year_to" min="1900" max="2025" value="2025">
+    </p>
+    <p>
+      <label for="hp_min">Мощность ≥</label>
+      <input type="number" id="hp_min" name="hp_min" min="0" step="1" value="200">
+      <label for="accel_max">0–100 ≤</label>
+      <input type="number" id="accel_max" name="accel_max" min="0" step="0.1" value="6.0">
+    </p>
+    <p><input type="submit" value="Найти"></p>
+  </form>
+</section>
+
+<!-- ===== Сортировка ===== -->
+<section>
+  <h2>Сортировка</h2>
+  <form action="/sort" method="get">
+    <p>
+      Первый уровень:
+      <select name="sort1" id="sort1">
+        <option>Нет</option>
+        <option>Марка</option>
+        <option>Модель</option>
+        <option>Год</option>
+        <option>Страна</option>
+        <option>Мощность (л.с.)</option>
+        <option>Объём (л)</option>
+        <option>0–100 (с)</option>
+        <option>Тираж (шт.)</option>
+        <option>Цена</option>
+      </select>
+      <label><input type="checkbox" name="desc1"> по убыванию?</label>
+    </p>
+
+    <p>
+      Второй уровень:
+      <select name="sort2" id="sort2">
+        <option>Нет</option>
+        <option>Марка</option>
+        <option>Модель</option>
+        <option>Год</option>
+        <option>Страна</option>
+        <option>Мощность (л.с.)</option>
+        <option>Объём (л)</option>
+        <option>0–100 (с)</option>
+        <option>Тираж (шт.)</option>
+        <option>Цена</option>
+      </select>
+      <label><input type="checkbox" name="desc2"> по убыванию?</label>
+    </p>
+
+    <p>
+      Третий уровень:
+      <select name="sort3" id="sort3">
+        <option>Нет</option>
+        <option>Марка</option>
+        <option>Модель</option>
+        <option>Год</option>
+        <option>Страна</option>
+        <option>Мощность (л.с.)</option>
+        <option>Объём (л)</option>
+        <option>0–100 (с)</option>
+        <option>Тираж (шт.)</option>
+        <option>Цена</option>
+      </select>
+      <label><input type="checkbox" name="desc3"> по убыванию?</label>
+    </p>
+
+    <p><input type="submit" value="Сортировать"></p>
+  </form>
+</section>
+
+<hr>
 </section>
 
 
