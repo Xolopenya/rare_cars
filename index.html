@@ -1,70 +1,407 @@
 <!DOCTYPE html>
 <html lang="ru">
+
 <head>
   <meta charset="utf-8">
   <title>Раритетные автомобили — Главная</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f0f0f0;
+      margin: 0;
+      padding: 0;
+    }
+
+    /*ШАПКА*/
+    header {
+      background-color: #333;
+      padding: 8px 0 15px 0;
+    }
+
+    /*НАВИГАЦИЯ*/
+    nav {
+      background-color: #222;
+      width: 97%;
+      margin: 6px auto;
+      border-radius: 6px;
+      box-shadow: 0 0 6px rgba(0, 0, 0, 0.4);
+      padding: 6px 10px;
+      text-align: center;
+      overflow: hidden;
+    }
+
+    .nav-inner {
+      display: inline-block;
+      width: 100%;
+      white-space: nowrap;
+      text-align: center;
+      position: relative;
+      box-sizing: border-box;
+    }
+
+    .menu {
+      display: inline-block;
+      vertical-align: middle;
+    }
+
+    .menu a {
+      display: inline-block;
+      background-color: #444;
+      color: white;
+      text-decoration: none;
+      padding: 10px 22px;
+      font-weight: bold;
+      margin: 0 3px;
+      border-radius: 3px 3px 0 0;
+    }
+
+    .menu a:hover,
+    .menu a.active {
+      background-color: #1abc9c;
+      color: #fff;
+    }
+
+    .search-box {
+      display: inline-block;
+      vertical-align: middle;
+      background-color: white;
+      border-radius: 6px;
+      padding: 2px 6px;
+      box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.3);
+      float: right;
+    }
+
+    .search-box form {
+      margin: 0;
+      padding: 0;
+      display: inline-block;
+    }
+
+    .search-box input[type="text"] {
+      border: none;
+      outline: none;
+      padding: 5px 5px;
+      width: 160px;
+      height: 28px;
+      vertical-align: middle;
+    }
+
+    .search-box button {
+      border: none;
+      background: none;
+      cursor: pointer;
+      padding: 0;
+      margin: 0;
+      vertical-align: middle;
+    }
+
+    .search-box img {
+      width: 20px;
+      height: 20px;
+      vertical-align: middle;
+    }
+
+    /*КОНТЕНТ*/
+    main {
+      width: 90%;
+      margin: 25px auto;
+      background-color: white;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+
+    h2,
+    h3 {
+      color: #333;
+    }
+
+    /*ГАЛЕРЕЯ*/
+    .gallery {
+      width: 90%;
+      margin: 20px auto;
+      text-align: center;
+      font-size: 0;
+    }
+
+    .column {
+      display: inline-block;
+      vertical-align: top;
+      font-size: 14px;
+      box-sizing: border-box;
+      margin: 0 0.5%;
+    }
+
+    .left,
+    .right {
+      width: 22%;
+    }
+
+    .center {
+      width: 45.5%;
+    }
+
+    .gallery img {
+      width: 100%;
+      height: auto;
+      margin: 5px 0;
+      border-radius: 6px;
+      transition: transform 0.3s;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.03);
+    }
+
+    /* ===== СТАТЬИ ===== */
+    .articles {
+      width: 95%;
+      margin: 30px auto;
+      text-align: center;
+      font-size: 0;
+    }
+
+    .articles article {
+      display: inline-block;
+      width: 30%;
+      margin: 1%;
+      vertical-align: top;
+      background-color: #fff;
+      border-radius: 8px;
+      box-shadow: 0 0 8px rgba(0, 0, 0, 0.1);
+      padding: 10px;
+      font-size: 14px;
+      box-sizing: border-box;
+      text-align: left;
+      min-height: 240px;
+    }
+
+    
+    .pic {
+      width: 40%;
+      height: 120px;
+      border-radius: 5px;
+      overflow: hidden;
+    }
+
+    .pic img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+
+    .left-img .pic {
+      float: left;
+      margin-right: 10px;
+    }
+
+    .right-img .pic {
+      float: right;
+      margin-left: 10px;
+    }
+
+    .no-img .text {
+      text-align: left;
+    }
+
+    /*ПОДРОБНЕЕ*/
+    .btn {
+      display: inline-block;
+      background-color: #007bff;
+      color: white;
+      text-decoration: none;
+      padding: 6px 12px;
+      border-radius: 6px;
+      font-weight: bold;
+      font-size: 13px;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+      transition: background-color 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #0056b3;
+    }
+
+    /*КРУГЛЫЕ КАРТИНКИ*/
+    .round-section {
+      text-align: center;
+      margin: 40px auto 30px auto;
+      width: 90%;
+      font-size: 0;
+    }
+
+    .round-item {
+      display: inline-block;
+      width: 30%;
+      margin: 0 1%;
+      font-size: 14px;
+      vertical-align: top;
+      text-align: center;
+    }
+
+    .round-item img {
+      width: 130px;
+      height: 130px;
+      border-radius: 50%;
+      object-fit: cover;
+      display: block;
+      margin: 0 auto 10px auto;
+      box-shadow: 0 3px 6px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s;
+    }
+
+    .round-item img:hover {
+      transform: scale(1.05);
+    }
+
+    .round-item h4 {
+      margin: 8px 0 4px 0;
+      font-size: 16px;
+      color: #222;
+    }
+
+    .round-item p {
+      margin: 0;
+      font-size: 13px;
+      color: #555;
+    }
+
+    /*ПОДВАЛ*/
+    footer {
+      background-color: #333;
+      color: white;
+      text-align: center;
+      padding: 15px;
+      margin-top: 30px;
+    }
+
+    footer p {
+      margin: 0;
+      font-size: 13px;
+    }
+  </style>
 </head>
-<body bgcolor="lightgray">
+
+<body>
   <header>
-    <h1 align="center">Раритетные Автомобили</h1>
-    <hr>
     <nav>
-      <ul>
-        <li><font size="4"><a href="index.html" title="Главная">Главная</a></font></li>
-        <li><font size="4"><a href="data.html" title="Табличные данные">Данные и формы</a></font></li>
-      </ul>
+      <div class="nav-inner">
+        <div class="menu">
+          <a href="index.html" class="active">Главная</a>
+          <a href="data.html">Данные</a>
+        </div>
+
+        <div class="search-box">
+          <form action="#" method="get">
+            <input type="text" placeholder="Поиск">
+            <button type="submit">
+              <img src="img/search_icon.png" alt="Поиск">
+            </button>
+          </form>
+        </div>
+      </div>
     </nav>
-    <hr>
   </header>
 
-  <section>
-    <h2>Галерея</h2>
+  <main>
     <div>
-      <a href="ferrari-250-gto.html" title="Ferrari 250 GTO"><img src="img/ferrari_250_gto.jpg" alt="Ferrari 250 GTO" width="280" height="180" hspace="8" vspace="6"></a>
-      <a href="bugatti-type-57sc-atlantic.html" title="Bugatti Type 57SC Atlantic"><img src="img/bugatti_type57sc_atlantic.jpg" alt="Bugatti Type 57SC Atlantic" width="280" height="180" hspace="8" vspace="6"></a>
-      <a href="mercedes-300sl-gullwing.html" title="Mercedes‑Benz 300SL Gullwing"><img src="img/mercedes_300sl.jpg" alt="Mercedes‑Benz 300SL Gullwing" width="280" height="180" hspace="8" vspace="6"></a>
-      <a href="aston-db4-gt-zagato.html" title="Aston Martin DB4 GT Zagato"><img src="img/aston_db4_gt_zagato.jpg" alt="Aston Martin DB4 GT Zagato" width="280" height="180" hspace="8" vspace="6"></a>
-      <a href="lamborghini-miura-sv.html" title="Lamborghini Miura SV"><img src="img/lamborghini_miura_sv.jpg" alt="Lamborghini Miura SV" width="280" height="180" hspace="8" vspace="6"></a>
+      <div class="gallery">
+        <div class="column left">
+          <a href="ferrari-250-gto.html"><img src="img/ferrari_250_gto.jpg" alt="Ferrari 250 GTO"></a>
+          <a href="bugatti-type-57sc-atlantic.html"><img src="img/bugatti_type57sc_atlantic.jpg"
+              alt="Bugatti Type 57SC Atlantic"></a>
+        </div>
+
+        <div class="column center">
+          <a href="mercedes-300sl-gullwing.html"><img src="img/mercedes_300sl.jpg" alt="Mercedes 300SL Gullwing"></a>
+        </div>
+
+        <div class="column right">
+          <a href="aston-db4-gt-zagato.html"><img src="img/aston_db4_gt_zagato.jpg"
+              alt="Aston Martin DB4 GT Zagato"></a>
+          <a href="lamborghini-miura-sv.html"><img src="img/lamborghini_miura_sv.jpg" alt="Lamborghini Miura SV"></a>
+        </div>
+      </div>
+
+      <div class="round-section">
+        <div class="round-item">
+          <img src="img/ferrari_250_gto.jpg" alt="Ferrari 250 GTO">
+          <h4>Ferrari 250 GTO</h4>
+          <p>Легендарная модель Ferrari 1960-х годов.</p>
+        </div>
+
+        <div class="round-item">
+          <img src="img/bugatti_type57sc_atlantic.jpg" alt="Bugatti Type 57SC Atlantic">
+          <h4>Bugatti Type 57SC Atlantic</h4>
+          <p>Редкий довоенный шедевр Bugatti.</p>
+        </div>
+
+        <div class="round-item">
+          <img src="img/mercedes_300sl.jpg" alt="Mercedes-Benz 300SL Gullwing">
+          <h4>Mercedes-Benz 300SL</h4>
+          <p>Икона дизайна с «крыльями чайки».</p>
+        </div>
+      </div>
+
+      <div class="articles">
+
+        <article class="left-img">
+          <div class="pic grey">
+            <img src="img/ferrari_250_gto.jpg" alt="Ferrari 250 GTO">
+          </div>
+          <div class="text">
+            <h3>Ferrari 250 GTO (1962–1964)</h3>
+            <p><b>Страна:</b> Италия<br>
+              <b>Двигатель:</b> V12 Colombo 3.0<br>
+              <b>Мощность:</b> 300 л.с.<br>
+              <b>0–100:</b> ~5,8 с
+            </p>
+            <p>Ferrari 250 GTO считается «святым Граалем» классического автоспорта. Эта машина сочетала итальянский
+              дизайн и лёгкий алюминиевый кузов.</p>
+            <a href="ferrari-250-gto.html" class="btn">Подробнее</a>
+          </div>
+        </article>
+
+        <article class="right-img">
+          <div class="pic pink">
+            <img src="img/bugatti_type57sc_atlantic.jpg" alt="Bugatti Type 57SC Atlantic">
+          </div>
+          <div class="text">
+            <h3>Bugatti Type 57SC Atlantic (1936–1938)</h3>
+            <p><b>Страна:</b> Франция<br>
+              <b>Двигатель:</b> Рядный 8, 3.3 л<br>
+              <b>Мощность:</b> 210 л.с.<br>
+              <b>0–100:</b> ~10,0 с
+            </p>
+            <p>Bugatti Type 57SC Atlantic — символ довоенной роскоши и инженерного новаторства. Создано лишь четыре
+              машины, каждая стала музейной ценностью.</p>
+            <a href="bugatti-type-57sc-atlantic.html" class="btn">Подробнее</a>
+          </div>
+        </article>
+
+        <article class="no-img">
+          <div class="text">
+            <h3>Mercedes-Benz 300SL Gullwing (1954–1957)</h3>
+            <p><b>Страна:</b> Германия<br>
+              <b>Двигатель:</b> Рядный 6, 3.0 л<br>
+              <b>Мощность:</b> 215 л.с. <br>
+              <b>0–100:</b> ~8,8 с
+            </p>
+            <p>Mercedes-Benz 300SL Gullwing известен своими «крыльями чайки» и системой впрыска топлива. Один из самых
+              красивых автомобилей XX века.</p>
+            <a href="mercedes-300sl-gullwing.html" class="btn">Подробнее</a>
+          </div>
+        </article>
+      </div>
     </div>
-    <hr>
-  </section>
-
-  <section>
-    <h2>Три автомобиля</h2>
-    <article>
-      <h3>Ferrari 250 GTO <small>(1962–1964)</small></h3>
-      <a href="ferrari-250-gto.html" title="Подробнее"><img src="img/ferrari_250_gto.jpg" alt="Ferrari 250 GTO" width="300" align="left" hspace="12" vspace="6"></a>
-      <p><b>Страна:</b> Италия<br><b>Двигатель:</b> V12 Colombo 3.0<br><b>Мощность:</b> ~300 л.с. • <b>0–100:</b> ~5,8 с</p>
-      <p>Ferrari 250 GTO считается «святым Граалем» классического автоспорта. Эта машина сочетала утончённый итальянский дизайн, лёгкий алюминиевый кузов и проверенный временем V12 Colombo. Всего выпущено около 36 экземпляров, и каждый из них участвовал в гонках начала 60‑х. Сегодня 250 GTO удерживает аукционные рекорды, достигая десятков миллионов долларов.</p>
-      <p><a href="ferrari-250-gto.html">Читать подробное описание →</a></p>
-      <br clear="all">
-      <hr>
-    </article>
-
-    <article>
-      <h3>Bugatti Type 57SC Atlantic <small>(1936–1938)</small></h3>
-      <a href="bugatti-type-57sc-atlantic.html" title="Подробнее"><img src="img/bugatti_type57sc_atlantic.jpg" alt="Bugatti Type 57SC Atlantic" width="300" align="left" hspace="12" vspace="6"></a>
-      <p><b>Страна:</b> Франция<br><b>Двигатель:</b> Рядный 8, 3.3 л<br><b>Мощность:</b> ~210 л.с. • <b>0–100:</b> ~10,0 с</p>
-      <p>Bugatti Type 57SC Atlantic — символ довоенной роскоши и инженерного новаторства. Автомобиль отличался характерным заклёпочным «плавником» по центру кузова и уникальными крыльями. Создано лишь четыре машины, каждая стала музейной ценностью. Atlantic олицетворяет вершину мастерства Жана Бугатти, объединившего эстетику и аэродинамику.</p>
-      <p><a href="bugatti-type-57sc-atlantic.html">Читать подробное описание →</a></p>
-      <br clear="all">
-      <hr>
-    </article>
-
-    <article>
-      <h3>Mercedes‑Benz 300SL Gullwing <small>(1954–1957)</small></h3>
-      <a href="mercedes-300sl-gullwing.html" title="Подробнее"><img src="img/mercedes_300sl.jpg" alt="Mercedes‑Benz 300SL Gullwing" width="300" align="left" hspace="12" vspace="6"></a>
-      <p><b>Страна:</b> Германия<br><b>Двигатель:</b> Рядный 6, 3.0 л<br><b>Мощность:</b> ~215 л.с. • <b>0–100:</b> ~8,8 с</p>
-      <p>Mercedes‑Benz 300SL Gullwing получил прозвище из‑за дверей, поднимавшихся вверх, словно крылья чайки. Это первый серийный автомобиль с системой непосредственного впрыска топлива, обеспечившей выдающуюся динамику для 50‑х. Дорожная версия происходила от гоночного прототипа W194, успешного в «24 часа Ле‑Мана». Сегодня 300SL считают одним из самых красивых и инновационных автомобилей XX века.</p>
-      <p><a href="mercedes-300sl-gullwing.html">Читать подробное описание →</a></p>
-      <br clear="all">
-      <hr>
-    </article>
-  </section>
+  </main>
 
   <footer>
-    <hr size="1" width="80%">
-    <p align="center">Сайт учебного назначения. Группа: <b>Б9123-09.03.04</b>. Разработчик: <b>Николенко Артём</b></p>
+    <p>Сайт учебного назначения. Группа: <b>Б9123-09.03.04</b>. Разработчик: <b>Николенко Артём</b>. Год разработки:
+      <b>2025</b>
+    </p>
   </footer>
 </body>
+
 </html>
